@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Wolves Financial Management</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#050607;
+  --panel:#0d0f11;
+  --panel2:#121518;
+  --line:#272b2f;
+  --text:#f7f7f4;
+  --muted:#858b91;
+  --gold:#f3c84b;
+  --gold2:#ffdf72;
+  --green:#62d58a;
+  --red:#ff6670;
+  --shadow:0 20px 60px rgba(0,0,0,.42);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  background:
+    radial-gradient(
+      circle at 50% -10%,
+      rgba(243,200,75,.10),
+      transparent 34%
+    ),
+    var(--bg);
+  color:var(--text);
+  font-family:Inter,system-ui,sans-serif;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  -webkit-tap-highlight-color:transparent;
+}
+
+.app{
+  max-width:520px;
+  min-height:100vh;
+  margin:auto;
+  padding-bottom:105px;
+}
+
+/* HEADER */
+
+.header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:24px 20px 10px;
+}
+
+.brand{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+
+.brandmark{
+  width:48px;
+  height:48px;
+  border-radius:16px;
+  display:grid;
+  place-items:center;
+
+  background:
+    linear-gradient(
+      145deg,
+      #f6d45b,
+      #9e7313
+    );
+
+  color:#111;
+  font-size:24px;
+  font-weight:900;
+
+  box-shadow:
+    0 8px 30px rgba(243,200,75,.18);
+}
+
+.brand b{
+  font-size:17px;
+  letter-spacing:-.5px;
+}
+
+.brand small{
+  display:block;
+  color:#72787d;
+  font-size:9px;
+  letter-spacing:2px;
+  margin-top:3px;
+}
+
+.bell{
+  width:42px;
+  height:42px;
+
+  border:1px solid var(--line);
+  border-radius:14px;
+
+  background:var(--panel);
+  color:#fff;
+
+  cursor:pointer;
+}
+
+/* PAGES */
+
+.page{
+  display:none;
+  padding:18px 20px;
+}
+
+.page.active{
+  display:block;
+}
+
+.eyebrow{
+  color:var(--gold);
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:1.8px;
+  text-transform:uppercase;
+}
+
+.title{
+  font-size:32px;
+  line-height:1.05;
+  font-weight:900;
+  letter-spacing:-1.8px;
+  margin:7px 0;
+}
+
+.sub{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.6;
+}
+
+/* HERO */
+
+.hero{
+  margin-top:20px;
+  padding:23px;
+
+  border-radius:28px;
+
+  border:1px solid rgba(243,200,75,.38);
+
+  background:
+    linear-gradient(
+      145deg,
+      #181611,
+      #0d0f10 58%,
+      #17130b
+    );
+
+  box-shadow:var(--shadow);
+
+  overflow:hidden;
+  position:relative;
+}
+
+.hero:after{
+  content:"W";
+
+  position:absolute;
+  right:-15px;
+  top:-30px;
+
+  font-size:190px;
+  font-weight:900;
+
+  color:rgba(243,200,75,.035);
+}
+
+.balance-label{
+  font-size:10px;
+  color:#9ca1a6;
+  letter-spacing:1.2px;
+  font-weight:700;
+}
+
+.balance{
+  font-size:43px;
+  font-weight:900;
+  letter-spacing:-2.5px;
+  margin:9px 0;
+}
+
+.up{
+  color:var(--green);
+  font-size:12px;
+  font-weight:800;
+}
+
+/* STATS */
+
+.stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:22px;
+}
+
+.stat{
+  padding-top:16px;
+  border-top:1px solid #3a3422;
+}
+
+.stat span{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+}
+
+.stat b{
+  display:block;
+  font-size:17px;
+  margin-top:5px;
+}
+
+/* QUICK ACTIONS */
+
+.actions{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-top:14px;
+}
+
+.action{
+  border:1px solid var(--line);
+  background:var(--panel);
+  color:#fff;
+  border-radius:17px;
+  padding:14px 6px;
+  cursor:pointer;
+  font-size:11px;
+  font-weight:700;
+}
+
+.action i{
+  display:block;
+  font-style:normal;
+  font-size:19px;
+  margin-bottom:6px;
+  color:var(--gold);
+}
+
+/* CARDS */
+
+.card{
+  background:
+    linear-gradient(
+      145deg,
+      #121517,
+      #0b0d0f
+    );
+
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:20px;
+  margin-top:14px;
+}
+
+.cardhead{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.card h3{
+  margin:0;
+  font-size:15px;
+}
+
+.gold{
+  color:var(--gold);
+}
+
+/* CHART */
+
+.chart{
+  height:105px;
+  margin-top:15px;
+  position:relative;
+  border-bottom:1px solid #30343a;
+}
+
+.chart svg{
+  width:100%;
+  height:100%;
+}
+
+.legend{
+  font-size:10px;
+  color:var(--muted);
+  line-height:1.6;
+  margin-top:10px;
+}
+
+/* BUTTONS */
+
+.btn{
+  border:0;
+  width:100%;
+
+  padding:16px;
+
+  border-radius:16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f7d45a,
+      #c99725
+    );
+
+  color:#111;
+
+  font-weight:900;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 10px 30px rgba(243,200,75,.14);
+}
+
+.btn:active{
+  transform:scale(.99);
+}
+
+.btn.dark{
+  background:#171a1d;
+  color:#fff;
+  border:1px solid var(--line);
+  box-shadow:none;
+}
+
+.btn + .btn{
+  margin-top:9px;
+}
+
+/* SECTIONS */
+
+.section-title{
+  font-size:19px;
+  font-weight:900;
+  margin:24px 0 10px;
+}
+
+/* NOTICE */
+
+.notice{
+  padding:13px 14px;
+
+  border-radius:15px;
+
+  background:#17150e;
+
+  border:1px solid #4b3b18;
+
+  color:#cfc8ae;
+
+  font-size:10px;
+  line-height:1.6;
+
+  margin-top:12px;
+}
+
+/* DEPOSIT */
+
+.steps{
+  display:flex;
+  gap:8px;
+  margin:18px 0;
+}
+
+.step{
+  flex:1;
+  height:7px;
+  border-radius:10px;
+  background:#292d31;
+}
+
+.step.on{
+  background:var(--gold);
+}
+
+.input{
+  width:100%;
+
+  padding:17px;
+
+  border-radius:17px;
+
+  border:1px solid var(--line);
+
+  outline:none;
+
+  background:#0a0c0e;
+  color:#fff;
+
+  font-size:22px;
+  font-weight:800;
+}
+
+.quick{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-top:10px;
+}
+
+.quick button{
+  padding:12px 4px;
+
+  border-radius:13px;
+
+  border:1px solid var(--line);
+
+  background:#111417;
+
+  color:#fff;
+
+  cursor:pointer;
+
+  font-size:11px;
+  font-weight:700;
+}
+
+.quick button.sel{
+  border-color:var(--gold);
+  color:var(--gold);
+  background:#1b170c;
+}
+
+/* QR */
+
+.qr{
+  width:190px;
+  height:190px;
+
+  margin:20px auto;
+
+  border:9px solid #fff;
+
+  background:
+    linear-gradient(
+      90deg,
+      #111 10%,
+      transparent 10% 20%,
+      #111 20% 29%,
+      transparent 29% 40%,
+      #111 40% 50%,
+      transparent 50% 63%,
+      #111 63% 72%,
+      transparent 72% 83%,
+      #111 83%
+    ),
+    linear-gradient(
+      #111 10%,
+      transparent 10% 20%,
+      #111 20% 30%,
+      transparent 30% 43%,
+      #111 43% 52%,
+      transparent 52% 65%,
+      #111 65% 75%,
+      transparent 75% 87%,
+      #111 87%
+    );
+
+  box-shadow:
+    0 0 0 1px #caa52e,
+    0 15px 35px rgba(0,0,0,.4);
+}
+
+.address{
+  display:flex;
+  gap:8px;
+  align-items:center;
+
+  background:#090b0c;
+
+  border:1px solid var(--line);
+
+  border-radius:14px;
+
+  padding:12px;
+}
+
+.address code{
+  font-size:10px;
+  color:#aaa;
+  word-break:break-all;
+  flex:1;
+}
+
+.copy{
+  border:1px solid #41464b;
+
+  background:#171a1d;
+
+  color:#fff;
+
+  border-radius:10px;
+
+  padding:9px;
+
+  cursor:pointer;
+}
+
+/* EARNING */
+
+.amount-big{
+  font-size:44px;
+  font-weight:900;
+  letter-spacing:-2px;
+  margin:8px 0 20px;
+}
+
+.range{
+  width:100%;
+  accent-color:var(--gold);
+}
+
+.range-labels{
+  display:flex;
+  justify-content:space-between;
+  color:#777;
+  font-size:10px;
+}
+
+.return{
+  display:grid;
+  gap:12px;
+  margin-top:18px;
+}
+
+.row{
+  display:flex;
+  justify-content:space-between;
+  font-size:12px;
+}
+
+.row span{
+  color:var(--muted);
+}
+
+.total{
+  border-top:1px solid var(--line);
+  padding-top:14px;
+}
+
+.total b{
+  font-size:20px;
+  color:var(--gold);
+}
+
+/* PROFILE */
+
+.profile{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.avatar{
+  width:62px;
+  height:62px;
+
+  border-radius:20px;
+
+  display:grid;
+  place-items:center;
+
+  background:
+    linear-gradient(
+      145deg,
+      #f5d35b,
+      #7c570d
+    );
+
+  color:#111;
+
+  font-weight:900;
+  font-size:20px;
+}
+
+.verified{
+  display:inline-block;
+
+  margin-top:5px;
+
+  padding:4px 8px;
+
+  border-radius:8px;
+
+  background:#172015;
+
+  color:var(--green);
+
+  font-size:9px;
+  font-weight:800;
+}
+
+.menu{
+  margin-top:16px;
+}
+
+.menu button{
+  width:100%;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  padding:17px 0;
+
+  background:none;
+  border:0;
+
+  border-bottom:1px solid var(--line);
+
+  color:#fff;
+
+  text-align:left;
+
+  cursor:pointer;
+}
+
+.menu small{
+  color:var(--muted);
+}
+
+/* TRANSACTIONS */
+
+.tx{
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  padding:15px 0;
+
+  border-bottom:1px solid var(--line);
+}
+
+.txicon{
+  width:38px;
+  height:38px;
+
+  border-radius:13px;
+
+  display:grid;
+  place-items:center;
+
+  background:#171b16;
+
+  color:var(--green);
+}
+
+.tx b{
+  font-size:12px;
+}
+
+.tx small{
+  display:block;
+  color:#777;
+  margin-top:4px;
+  font-size:9px;
+}
+
+.tx strong{
+  margin-left:auto;
+  color:var(--green);
+  font-size:12px;
+}
+
+/* BOTTOM NAV */
+
+.bottom{
+  position:fixed;
+
+  bottom:12px;
+  left:50%;
+
+  transform:translateX(-50%);
+
+  width:calc(100% - 28px);
+  max-width:492px;
+
+  height:74px;
+
+  padding:7px;
+
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+
+  background:rgba(14,16,18,.94);
+
+  backdrop-filter:blur(20px);
+
+  border:1px solid #30343a;
+
+  border-radius:25px;
+
+  z-index:20;
+
+  box-shadow:0 15px 45px rgba(0,0,0,.5);
+}
+
+.nav{
+  border:0;
+
+  background:transparent;
+
+  color:#73797e;
+
+  border-radius:19px;
+
+  cursor:pointer;
+
+  font-size:10px;
+  font-weight:700;
+}
+
+.nav em{
+  display:block;
+  font-style:normal;
+  font-size:19px;
+  margin-bottom:4px;
+}
+
+.nav.active{
+  background:
+    linear-gradient(
+      145deg,
+      #f4d052,
+      #aa7915
+    );
+
+  color:#111;
+}
+
+/* MODAL */
+
+.modal{
+  position:fixed;
+  inset:0;
+
+  background:rgba(0,0,0,.75);
+
+  backdrop-filter:blur(8px);
+
+  display:none;
+  align-items:flex-end;
+
+  z-index:50;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.sheet{
+  width:100%;
+  max-width:520px;
+
+  margin:auto;
+
+  background:#101214;
+
+  border:1px solid #34383c;
+
+  border-radius:28px 28px 0 0;
+
+  padding:22px;
+}
+
+.sheet h3{
+  margin:0 0 8px;
+  font-size:20px;
+}
+
+/* TOAST */
+
+.toast{
+  position:fixed;
+
+  left:50%;
+  bottom:100px;
+
+  transform:
+    translateX(-50%)
+    translateY(20px);
+
+  opacity:0;
+
+  background:#f3c84b;
+
+  color:#111;
+
+  padding:11px 15px;
+
+  border-radius:12px;
+
+  font-size:11px;
+  font-weight:800;
+
+  z-index:80;
+
+  transition:.25s;
+}
+
+.toast.show{
+  opacity:1;
+
+  transform:
+    translateX(-50%)
+    translateY(0);
+}
+
+@media(min-width:700px){
+
+  body{
+    padding:20px;
+  }
+
+  .app{
+    border:1px solid #202428;
+    border-radius:30px;
+    overflow:hidden;
+    min-height:calc(100vh - 40px);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="header">
+
+  <div class="brand">
+
+    <div class="brandmark">
+      W
+    </div>
+
+    <div>
+      <b>WOLVES</b>
+      <small>FINANCIAL MANAGEMENT</small>
+    </div>
+
+  </div>
+
+  <button
+    class="bell"
+    onclick="toast('No new notifications')">
+    ♧
+  </button>
+
+</header>
+
+
+<main>
+
+<!-- HOME -->
+
+<section
+  id="home"
+  class="page active">
+
+  <div class="eyebrow">
+    Private wealth dashboard
+  </div>
+
+  <div class="title">
+    Good evening,<br>
+    Wolves Member.
+  </div>
+
+  <div class="sub">
+    Your money, your progress, your next move.
+  </div>
+
+
+  <div class="hero">
+
+    <div class="balance-label">
+      TOTAL BALANCE
+    </div>
+
+    <div
+      class="balance"
+      id="balance">
+      $12,480.00
+    </div>
+
+    <div class="up">
+      ▲ +$428.60 &nbsp; +3.56%
+    </div>
+
+
+    <div class="stats">
+
+      <div class="stat">
+        <span>AVAILABLE BALANCE</span>
+        <b>$8,240.00</b>
+      </div>
+
+      <div class="stat">
+        <span>TOTAL EARNINGS</span>
+        <b>$428.60</b>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="actions">
+
+    <button
+      class="action"
+      onclick="go('deposit')">
+
+      <i>＋</i>
+      Deposit
+
+    </button>
+
+
+    <button
+      class="action"
+      onclick="toast('Withdrawal request opened')">
+
+      <i>↗</i>
+      Withdraw
+
+    </button>
+
+
+    <button
+      class="action"
+      onclick="toast('Transfer feature opened')">
+
+      <i>⇄</i>
+      Transfer
+
+    </button>
+
+  </div>
+
+
+  <div class="card">
+
+    <div class="cardhead">
+
+      <h3>
+        Earning Overview
+      </h3>
+
+      <b class="gold">
+        7.50%*
+      </b>
+
+    </div>
+
+
+    <div class="chart">
+
+      <svg
+        viewBox="0 0 500 120"
+        preserveAspectRatio="none">
+
+        <polyline
+          points="
+          0,105
+          55,98
+          100,92
+          145,84
+          190,89
+          235,70
+          280,62
+          325,48
+          370,54
+          415,31
+          460,38
+          500,12"
+          fill="none"
+          stroke="#f3c84b"
+          stroke-width="3"/>
+
+        <polyline
+          points="
+          0,105
+          55,98
+          100,92
+          145,84
+          190,89
+          235,70
+          280,62
+          325,48
+          370,54
+          415,31
+          460,38
+          500,12
+          500,120
+          0,120"
+          fill="rgba(243,200,75,.08)"
+          stroke="none"/>
+
+      </svg>
+
+    </div>
+
+
+    <div class="legend">
+
+      Your balance can grow according to
+      the applicable financial product terms.
+
+      <b>*Example rate.</b>
+
+    </div>
+
+
+    <button
+      class="btn"
+      style="margin-top:14px"
+      onclick="go('earning')">
+
+      Explore Earning →
+
+    </button>
+
+  </div>
+
+
+  <div class="card">
+
+    <div class="cardhead">
+
+      <h3>
+        Recent Activity
+      </h3>
+
+      <button
+        class="copy"
+        onclick="openHistory()">
+
+        View all
+
+      </button>
+
+    </div>
+
+
+    <div class="tx">
+
+      <div class="txicon">
+        ↓
+      </div>
+
+      <div>
+        <b>Deposit</b>
+        <small>
+          Today · 03:45 PM
+        </small>
+      </div>
+
+      <strong>
+        +$1,000
+      </strong>
+
+    </div>
+
+
+    <div class="tx">
+
+      <div class="txicon">
+        ↗
+      </div>
+
+      <div>
+        <b>Earning</b>
+        <small>
+          Yesterday · 11:59 PM
+        </small>
+      </div>
+
+      <strong>
+        +$37.50
+      </strong>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- DEPOSIT -->
+
+<section
+  id="deposit"
+  class="page">
+
+  <div class="eyebrow">
+    Fund your account
+  </div>
+
+  <div class="title">
+    Deposit
+  </div>
+
+  <div class="sub">
+    A clean two-step funding experience.
+  </div>
+
+
+  <div class="steps">
+
+    <div
+      class="step on"
+      id="s1">
+    </div>
+
+    <div
+      class="step"
+      id="s2">
+    </div>
+
+  </div>
+
+
+  <div
+    id="dep1"
+    class="card">
+
+    <div class="eyebrow">
+      Step 01
+    </div>
+
+    <h2>
+      Choose deposit amount
+    </h2>
+
+    <div class="sub">
+      Enter an amount to continue.
+    </div>
+
+
+    <input
+      class="input"
+      id="depAmount"
+      type="number"
+      min="10"
+      value="1000"
+      oninput="syncDep()">
+
+
+    <div class="quick">
+
+      <button onclick="setDep(100)">
+        100
+      </button>
+
+      <button onclick="setDep(500)">
+        500
+      </button>
+
+      <button
+        class="sel"
+        onclick="setDep(1000)">
+        1,000
+      </button>
+
+      <button onclick="setDep(5000)">
+        5,000
+      </button>
+
+      <button onclick="setDep(10000)">
+        10,000
+      </button>
+
+      <button onclick="setDep(20000)">
+        20,000
+      </button>
+
+    </div>
+
+
+    <button
+      class="btn"
+      style="margin-top:20px"
+      onclick="nextDeposit()">
+
+      Continue →
+
+    </button>
+
+  </div>
+
+
+  <div
+    id="dep2"
+    class="card"
+    style="display:none;text-align:center">
+
+    <div class="eyebrow">
+      Step 02
+    </div>
+
+    <h2>
+      Complete your deposit
+    </h2>
+
+    <div class="sub">
+      Scan the QR code or copy the payment address.
+    </div>
+
+
+    <div class="qr"></div>
+
+
+    <div class="address">
+
+      <code id="address">
+        WF7s9X...2kLm9Pz8
+      </code>
+
+      <button
+        class="copy"
+        onclick="copyAddress()">
+
+        Copy
+
+      </button>
+
+    </div>
+
+
+    <div class="notice">
+
+      Send only the exact amount shown:
+
+      <b id="sendAmount">
+        $1,000.00
+      </b>.
+
+      Funds are added after payment confirmation.
+
+    </div>
+
+
+    <button
+      class="btn"
+      style="margin-top:15px"
+      onclick="confirmDeposit()">
+
+      I've Sent the Payment
+
+    </button>
+
+
+    <button
+      class="btn dark"
+      onclick="resetDeposit()">
+
+      Back
+
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- EARNING -->
+
+<section
+  id="earning"
+  class="page">
+
+  <div class="eyebrow">
+    Premium earning
+  </div>
+
+  <div class="title">
+    Build Your Wealth.
+  </div>
+
+  <div class="sub">
+    Explore an example projection based on amount and term.
+  </div>
+
+
+  <div class="card">
+
+    <div class="cardhead">
+
+      <h3>
+        Example annual rate
+      </h3>
+
+      <b class="gold">
+        7.50%
+      </b>
+
+    </div>
+
+
+    <div class="notice">
+
+      Projection only.
+
+      Actual rates, eligibility, fees
+      and returns depend on the applicable
+      financial product.
+
+      Returns are not guaranteed.
+
+    </div>
+
+
+    <div class="section-title">
+      Investment Amount
+    </div>
+
+
+    <div
+      class="amount-big"
+      id="amt">
+
+      $5,000
+
+    </div>
+
+
+    <input
+      class="range"
+      id="range"
+      type="range"
+      min="100"
+      max="50000"
+      step="100"
+      value="5000"
+      oninput="calc()">
+
+
+    <div class="range-labels">
+
+      <span>
+        $100
+      </span>
+
+      <span>
+        $50,000
+      </span>
+
+    </div>
+
+
+    <div class="return">
+
+      <div class="row">
+
+        <span>
+          Starting amount
+        </span>
+
+        <b id="start">
+          $5,000
+        </b>
+
+      </div>
+
+
+      <div class="row">
+
+        <span>
+          Example return
+        </span>
+
+        <b
+          class="gold"
+          id="profit">
+
+          +$375.00
+
+        </b>
+
+      </div>
+
+
+      <div class="row">
+
+        <span>
+          Period
+        </span>
+
+        <b>
+          12 Months
+        </b>
+
+      </div>
+
+
+      <div class="row total">
+
+        <span>
+          Projected total
+        </span>
+
+        <b id="total">
+          $5,375.00
+        </b>
+
+      </div>
+
+    </div>
+
+
+    <button
+      class="btn"
+      style="margin-top:20px"
+      onclick="toast('Projection saved to your dashboard')">
+
+      Save Projection
+
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- PROFILE -->
+
+<section
+  id="profile"
+  class="page">
+
+  <div class="eyebrow">
+    Account
+  </div>
+
+  <div class="title">
+    Profile
+  </div>
+
+  <div class="sub">
+    Your Wolves account, secured and organized.
+  </div>
+
+
+  <div class="card">
+
+    <div class="profile">
+
+      <div class="avatar">
+        KS
+      </div>
+
+      <div>
+
+        <h3 style="margin:0">
+          Wolves Member
+        </h3>
+
+        <span class="verified">
+          ✓ VERIFIED
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="menu">
+
+      <button onclick="openHistory()">
+
+        <span>
+          Transaction history
+        </span>
+
+        <small>
+          ›
+        </small>
+
+      </button>
+
+
+      <button onclick="toast('Security center opened')">
+
+        <span>
+          Security
+        </span>
+
+        <small>
+          ›
+        </small>
+
+      </button>
+
+
+      <button onclick="toast('Notifications opened')">
+
+        <span>
+          Notifications
+        </span>
+
+        <small>
+          ›
+        </small>
+
+      </button>
+
+
+      <button onclick="toast('Settings opened')">
+
+        <span>
+          Settings
+        </span>
+
+        <small>
+          ›
+        </small>
+
+      </button>
+
+
+      <button onclick="toast('Help & support opened')">
+
+        <span>
+          Help & Support
+        </span>
+
+        <small>
+          ›
+        </small>
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <button
+    class="btn dark"
+    style="margin-top:14px"
+    onclick="toast('You are securely logged out in the demo')">
+
+    Log Out
+
+  </button>
+
+</section>
+
+</main>
+
+
+<!-- BOTTOM NAV -->
+
+<nav class="bottom">
+
+  <button
+    class="nav active"
+    data-page="home"
+    onclick="go('home')">
+
+    <em>⌂</em>
+    Home
+
+  </button>
+
+
+  <button
+    class="nav"
+    data-page="deposit"
+    onclick="go('deposit')">
+
+    <em>＋</em>
+    Deposit
+
+  </button>
+
+
+  <button
+    class="nav"
+ 
